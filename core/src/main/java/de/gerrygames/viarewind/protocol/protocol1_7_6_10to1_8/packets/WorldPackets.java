@@ -82,7 +82,7 @@ public class WorldPackets {
 				handler(packetWrapper -> {
 					Position position = packetWrapper.read(Type.POSITION);
 					packetWrapper.write(Type.INT, position.getX());
-					packetWrapper.write(Type.UNSIGNED_BYTE, position.getY());
+					packetWrapper.write(Type.UNSIGNED_BYTE, (short) position.getY());
 					packetWrapper.write(Type.INT, position.getZ());
 				});
 				handler(packetWrapper -> {
@@ -109,7 +109,7 @@ public class WorldPackets {
 				handler(packetWrapper -> {
 					Position position = packetWrapper.read(Type.POSITION);
 					packetWrapper.write(Type.INT, position.getX());
-					packetWrapper.write(Type.SHORT, position.getY());
+					packetWrapper.write(Type.SHORT, (short) position.getY());
 					packetWrapper.write(Type.INT, position.getZ());
 				});
 				map(Type.UNSIGNED_BYTE);
@@ -208,7 +208,7 @@ public class WorldPackets {
 				handler(packetWrapper -> {
 					Position position = packetWrapper.read(Type.POSITION);
 					packetWrapper.write(Type.INT, position.getX());
-					packetWrapper.write(Type.SHORT, position.getY());
+					packetWrapper.write(Type.SHORT, (short) position.getY());
 					packetWrapper.write(Type.INT, position.getZ());
 				});
 				handler(packetWrapper -> {
@@ -302,7 +302,7 @@ public class WorldPackets {
 				handler(packetWrapper -> {
 					Position position = packetWrapper.read(Type.POSITION);
 					packetWrapper.write(Type.INT, position.getX());
-					packetWrapper.write(Type.SHORT, position.getY());
+					packetWrapper.write(Type.SHORT, (short) position.getY());
 					packetWrapper.write(Type.INT, position.getZ());
 				});
 				map(Type.UNSIGNED_BYTE);  //Action

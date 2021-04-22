@@ -9,6 +9,7 @@ import de.gerrygames.viarewind.protocol.protocol1_7_6_10to1_8.types.Particle;
 import de.gerrygames.viarewind.protocol.protocol1_7_6_10to1_8.types.Types1_7_6_10;
 import de.gerrygames.viarewind.protocol.protocol1_8to1_9.types.Chunk1_8Type;
 import de.gerrygames.viarewind.replacement.Replacement;
+import de.gerrygames.viarewind.storage.BlockState;
 import de.gerrygames.viarewind.types.VarLongType;
 import de.gerrygames.viarewind.utils.ChatUtil;
 import de.gerrygames.viarewind.utils.PacketUtil;

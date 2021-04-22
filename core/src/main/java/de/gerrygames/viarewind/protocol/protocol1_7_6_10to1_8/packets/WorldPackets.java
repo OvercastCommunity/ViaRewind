@@ -43,9 +43,9 @@ public class WorldPackets {
 					for (ChunkSection section : chunk.getSections()){
 						if (section == null) continue;
 						for (int i = 0; i < section.getPaletteSize(); i++) {
-							int block = section.getPaletteEntry(i);
-							int replacedBlock = ReplacementRegistry1_7_6_10to1_8.replace(block);
-							section.setPaletteEntry(i, replacedBlock);
+							BlockState state = BlockState.rawToState(block)
+							state = ReplacementRegistry1_7_6_10to1_8.replace(state);
+							section.setPaletteEntry(i, BlockState.stateToRaw(state));
 						}
 					}
 				});
@@ -65,8 +65,9 @@ public class WorldPackets {
 					for (BlockChangeRecord record : records) {
 						short data = (short) (record.getSectionX() << 12 | record.getSectionZ() << 8 | record.getY());
 						packetWrapper.write(Type.SHORT, data);
-						int replacedBlock = ReplacementRegistry1_7_6_10to1_8.replace(record.getBlockId());
-						packetWrapper.write(Type.SHORT, (short) replacedBlock);
+						BlockState state = BlockState.rawToState(record.getBlockId());
+						state = ReplacementRegistry1_7_6_10to1_8.replace(state);
+						packetWrapper.write(Type.SHORT, (short) BlockState.stateToRaw(state));
 					}
 				});
 			}
@@ -92,7 +93,6 @@ public class WorldPackets {
 
 					blockId = state.getId();
 					meta = state.getData();
-					}
 
 					packetWrapper.write(Type.VAR_INT, blockId);
 					packetWrapper.write(Type.UNSIGNED_BYTE, (short) meta);
@@ -265,7 +265,6 @@ public class WorldPackets {
 
 							PacketUtil.sendPacket(columnUpdate, Protocol1_7_6_10TO1_8.class, true, true);
 						}
-
 					}
 
 					if (count > 0) {
@@ -355,3 +354,6 @@ public class WorldPackets {
 				});
 			}
 		});
+
+	}
+}

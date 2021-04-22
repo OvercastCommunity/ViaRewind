@@ -8,7 +8,6 @@ import de.gerrygames.viarewind.protocol.protocol1_8to1_9.items.ReplacementRegist
 import de.gerrygames.viarewind.protocol.protocol1_8to1_9.metadata.MetadataRewriter;
 import de.gerrygames.viarewind.protocol.protocol1_8to1_9.storage.EntityTracker;
 import de.gerrygames.viarewind.replacement.EntityReplacement;
-import de.gerrygames.viarewind.storage.BlockState;
 import de.gerrygames.viarewind.utils.PacketUtil;
 import us.myles.ViaVersion.api.PacketWrapper;
 import us.myles.ViaVersion.api.entities.Entity1_10Types;
@@ -86,8 +85,9 @@ public class SpawnPackets {
 					if (type.is(Entity1_10Types.EntityType.FALLING_BLOCK)) {
 						BlockState state = new BlockState(data & 0xFFF, data >> 12 & 0xF);
 						state = ReplacementRegistry1_8to1_9.replace(state);
-						packetWrapper.set(Type.INT, 3, state.getId() | state.getData() << 12);
-					}
+						if (replace != null) {
+							packetWrapper.set(Type.INT, 3, state.getId() | state.getData() << 12);
+						}
 					}
 
 					if (data > 0) {
@@ -165,7 +165,6 @@ public class SpawnPackets {
 				map(Type.SHORT);
 				map(Type.SHORT);
 				map(Types1_9.METADATA_LIST, Types1_8.METADATA_LIST);
-				map(Types1_9.METADATA_LIST, Types1_8.METADATA_LIST);
 				handler(packetWrapper -> {
 					int entityId = packetWrapper.get(Type.VAR_INT, 0);
 					int typeId = packetWrapper.get(Type.UNSIGNED_BYTE, 0);
@@ -175,7 +174,6 @@ public class SpawnPackets {
 					byte pitch = packetWrapper.get(Type.BYTE, 1);
 					byte yaw = packetWrapper.get(Type.BYTE, 0);
 					byte headYaw = packetWrapper.get(Type.BYTE, 2);
-
 
 					if (typeId == 69) {
 						packetWrapper.cancel();
@@ -207,7 +205,6 @@ public class SpawnPackets {
 						MetadataRewriter.transform(tracker.getClientEntityTypes().get(entityId), metadataList);
 					} else {
 						wrapper.cancel();
-						}
 					}
 				});
 			}

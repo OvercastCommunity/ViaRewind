@@ -2,12 +2,12 @@ package de.gerrygames.viarewind.replacement;
 
 import de.gerrygames.viarewind.storage.BlockState;
 import us.myles.ViaVersion.api.minecraft.item.Item;
-
-import java.util.HashMap;
+import us.myles.viaversion.libs.fastutil.ints.Int2ObjectMap;
+import us.myles.viaversion.libs.fastutil.ints.Int2ObjectOpenHashMap;
 
 public class ReplacementRegistry {
-	private HashMap<Integer, Replacement> itemReplacements = new HashMap<>();
-	private HashMap<Integer, Replacement> blockReplacements = new HashMap<>();
+	private final Int2ObjectMap<Replacement> itemReplacements = new Int2ObjectOpenHashMap<>();
+	private final Int2ObjectMap<Replacement> blockReplacements = new Int2ObjectOpenHashMap<>();
 
 
 	public void registerItem(int id, Replacement replacement) {
@@ -47,7 +47,7 @@ public class ReplacementRegistry {
 		return replacement==null ? block : replacement.replace(block);
 	}
 
-	private static int combine(int id, int data) {
+	public static int combine(int id, int data) {
 		return (id << 16) | (data & 0xFFFF);
 	}
 }

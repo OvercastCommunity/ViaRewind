@@ -8,6 +8,7 @@ import de.gerrygames.viarewind.protocol.protocol1_7_6_10to1_8.types.Chunk1_7_10T
 import de.gerrygames.viarewind.protocol.protocol1_7_6_10to1_8.types.Particle;
 import de.gerrygames.viarewind.protocol.protocol1_7_6_10to1_8.types.Types1_7_6_10;
 import de.gerrygames.viarewind.protocol.protocol1_8to1_9.types.Chunk1_8Type;
+import de.gerrygames.viarewind.replacement.Replacement;
 import de.gerrygames.viarewind.storage.BlockState;
 import de.gerrygames.viarewind.types.VarLongType;
 import de.gerrygames.viarewind.utils.ChatUtil;
@@ -43,6 +44,7 @@ public class WorldPackets {
 					for (ChunkSection section : chunk.getSections()){
 						if (section == null) continue;
 						for (int i = 0; i < section.getPaletteSize(); i++) {
+							int block = section.getPaletteEntry(i);
 							BlockState state = BlockState.rawToState(block);
 							state = ReplacementRegistry1_7_6_10to1_8.replace(state);
 							section.setPaletteEntry(i, BlockState.stateToRaw(state));

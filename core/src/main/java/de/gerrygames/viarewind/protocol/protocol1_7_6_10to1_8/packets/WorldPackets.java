@@ -43,7 +43,7 @@ public class WorldPackets {
 					for (ChunkSection section : chunk.getSections()){
 						if (section == null) continue;
 						for (int i = 0; i < section.getPaletteSize(); i++) {
-							BlockState state = BlockState.rawToState(block)
+							BlockState state = BlockState.rawToState(block);
 							state = ReplacementRegistry1_7_6_10to1_8.replace(state);
 							section.setPaletteEntry(i, BlockState.stateToRaw(state));
 						}
